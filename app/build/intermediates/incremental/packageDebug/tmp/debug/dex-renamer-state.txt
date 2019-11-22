@@ -1,0 +1,4 @@
+#Fri Nov 22 21:13:28 ALMT 2019
+base.0=D\:\\University_lessons\\7-semester\\TeamWork\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

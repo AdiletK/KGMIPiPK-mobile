@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">KGMIiPK</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="menu_home">Занятие</string>
+
+    <string name="login">Войти</string>
+    <string name="email">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="authorize_text">Авторизация</string>
+    <string name="home_fragment_spinner_title">Группа</string>
+    <string name="home_fragment_spinner_title_course">Курс</string>
+    <string name="home_fragment_spinner_title_teacher">Преподаватель</string>
+    <string name="history_of_lessons">Проведенные занятие</string>
+    <string name="new_lesson">Новое занятие</string>
+    <string name="new_lesson_date">Дата</string>
+    <string name="new_lesson_group">Группа</string>
+    <string name="new_lesson_theme">Тема</string>
+    <string name="new_lesson_type">Вид занятий</string>
+    <string name="new_lesson_count">Кол-во часов</string>
+    <string name="btn_text_form">Сформировать</string>
+    <string name="note_title">Примечание</string>
+    <string name="title_save">Сохранить</string>
+    <string name="text_empty_list_of_lessons">Нет проведенных занятий</string>
+    <string name="text_empty_list_of_student">В этот курс пока никто не зачислен</string>
+</resources>

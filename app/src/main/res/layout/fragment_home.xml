@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_fragment_spinner_title_course"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/course_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SpinnerStyle"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_margin="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_fragment_spinner_title"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/group_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SpinnerStyle"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_margin="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_fragment_spinner_title_teacher"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/teacher_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SpinnerStyle"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_history_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:text="@string/history_of_lessons"
+        android:textSize="12sp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_new_lesson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:text="@string/new_lesson"/>
+
+</LinearLayout>

@@ -28,12 +28,12 @@ class LessonListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lessons)
         supportActionBar?.title = "Список"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
+        show_pr()
         getData()
         initViews()
         listOfLextures()
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId==android.R.id.home){
@@ -68,8 +68,10 @@ class LessonListActivity : AppCompatActivity() {
     }
 
     private fun listOfLextures() {
-        NetworkService
-            .instance
+        val settings = getSharedPreferences("Test", 0)
+        val token = settings?.getString(getString(R.string.secret_token), "")!!
+        Log.e("Token",token)
+        NetworkService(token)
             .lextureApi
             .getLextures(group,teacher)
             .enqueue(object : Callback<List<LectureModel>> {
@@ -81,15 +83,22 @@ class LessonListActivity : AppCompatActivity() {
                     call: Call<List<LectureModel>>,
                     response: Response<List<LectureModel>>
                 ) {
-                    if(response.body()!!.isEmpty()){
+                    if(response.body()==null){
                         text_if_empty.visibility = View.VISIBLE
                     }else{
                         text_if_empty.visibility = View.GONE
                         lectureAdapter.updateData(response.body()!!)
                     }
+                    hide_pr()
                 }
             })
 
+    }
+    private fun show_pr(){
+        lesson_progress_bar.visibility =View.VISIBLE
+    }
+    private fun hide_pr(){
+        lesson_progress_bar.visibility = View.GONE
     }
 
 }

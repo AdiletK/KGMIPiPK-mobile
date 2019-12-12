@@ -23,4 +23,8 @@
     <string name="title_save">Сохранить</string>
     <string name="text_empty_list_of_lessons">Нет проведенных занятий</string>
     <string name="text_empty_list_of_student">В этот курс пока никто не зачислен</string>
+
+    <string name="secret_token">token</string>
+    <string name="depart_id">department</string>
+    <string name="depart_name">department_name</string>
 </resources>

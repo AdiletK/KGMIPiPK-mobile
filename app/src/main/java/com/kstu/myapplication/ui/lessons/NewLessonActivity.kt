@@ -19,6 +19,7 @@ import java.io.Serializable
 import java.util.*
 import android.widget.ArrayAdapter
 import com.kstu.myapplication.R
+import kotlinx.android.synthetic.main.progress_dialog.*
 
 
 class NewLessonActivity : AppCompatActivity() {
@@ -26,10 +27,12 @@ class NewLessonActivity : AppCompatActivity() {
     var isEditMode = false
     var lextureId = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_lesson)
         val data = intent.getSerializableExtra("lecture")
+        new_les_progress_bar.visibility =View.VISIBLE
         initSetup(data)
         initViews()
     }
@@ -40,6 +43,7 @@ class NewLessonActivity : AppCompatActivity() {
             data as LectureModel
             lextureId = data.Nom
             isEditMode = true
+            new_les_progress_bar.visibility =View.GONE
             editLecture(data)
         } else {
             supportActionBar?.title = "Новое занятие"
@@ -50,9 +54,12 @@ class NewLessonActivity : AppCompatActivity() {
     }
 
     private fun initApiService() {
-        NetworkService.instance
+        val settings = getSharedPreferences("Test", 0)
+        val token = settings?.getString(getString(R.string.secret_token), "")!!
+        val depId = settings.getInt(getString(R.string.depart_id), -1)
+        NetworkService(token)
             .courseApi
-            .getCourses()
+            .getCourses(depId)
             .enqueue(object : Callback<List<CourseModel>>{
                 override fun onFailure(call: Call<List<CourseModel>>, t: Throwable) {
                     Toast.makeText(this@NewLessonActivity,"Couldn't connect to server",Toast.LENGTH_LONG).show()
@@ -67,9 +74,9 @@ class NewLessonActivity : AppCompatActivity() {
                 }
 
             })
-        NetworkService.instance
+        NetworkService(token)
             .teacherApi
-            .getTeachers()
+            .getTeachers(depId)
             .enqueue(object : Callback<List<TeacherModel>>{
                 override fun onFailure(call: Call<List<TeacherModel>>, t: Throwable) {
                     Log.e("Fail",t.message+"")
@@ -85,7 +92,7 @@ class NewLessonActivity : AppCompatActivity() {
                 }
 
             })
-        NetworkService.instance
+        NetworkService(token)
             .themeApi
             .getThemes()
             .enqueue(object :Callback<List<ThemeNavigation>>{
@@ -99,9 +106,10 @@ class NewLessonActivity : AppCompatActivity() {
                 ) {
                     if (response.body()!=null)
                     updateThemeSpin(response.body()!!)
+                    new_les_progress_bar.visibility = View.GONE
                 }
             })
-        NetworkService.instance
+        NetworkService(token)
             .typeOfLessonApi
             .getTypesOfLesson()
             .enqueue(object :Callback<List<TypeOfLesson>>{
@@ -120,8 +128,6 @@ class NewLessonActivity : AppCompatActivity() {
             })
     }
 
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId==android.R.id.home){
             onBackPressed()
@@ -132,6 +138,9 @@ class NewLessonActivity : AppCompatActivity() {
     private fun initViews() {
 
         btn_form.setOnClickListener {
+//            val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//            inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
             if (isEditMode){
                 openStudentActivity(lextureId)
             }else{
@@ -146,12 +155,7 @@ class NewLessonActivity : AppCompatActivity() {
         spin_course.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.e("Selected listener ", "$position  $id")
                 val selectedItem = parent?.getItemAtPosition(position) as CourseModel
                 if (selectedItem.groups != null) {
@@ -159,7 +163,7 @@ class NewLessonActivity : AppCompatActivity() {
                 }
             }
         }
-        }
+    }
 
     private fun newLecture() {
         val date = initDate()
@@ -168,10 +172,14 @@ class NewLessonActivity : AppCompatActivity() {
     }
 
     private fun insertLecture() {
-        loadingProgressBar.visibility = View.VISIBLE
+        val settings = getSharedPreferences("Test", 0)
+        val token = settings?.getString(getString(R.string.secret_token), "")!!
+        new_les_progress_bar.visibility =View.VISIBLE
+        llProgressBar.visibility = View.VISIBLE
+        txt_sign_in.visibility = View.GONE
         val lectureModel = getLectureData()
         if (lectureModel!=null){
-            NetworkService.instance
+            NetworkService(token)
                 .lextureApi
                 .insertLecture(lectureModel)
                 .enqueue(object : Callback<Int>{
@@ -187,11 +195,12 @@ class NewLessonActivity : AppCompatActivity() {
                         }
                     }
                 })
+
+            Log.e("Token",token)
         }else{
             Toast.makeText(this@NewLessonActivity,"Выберите все поля!",Toast.LENGTH_LONG).show()
-            hideProgressBar()
         }
-
+        hideProgressBar()
     }
 
     private fun getLectureData(): InsertLectureDataModel? {
@@ -214,7 +223,6 @@ class NewLessonActivity : AppCompatActivity() {
     }
 
     private fun openStudentActivity(id: Int) {
-        //startActivity(Intent(this, StudentsActivity::class.java))
         val intent = Intent(this,StudentsActivity::class.java)
         intent.putExtra("id",id)
         startActivity(intent)
@@ -223,7 +231,7 @@ class NewLessonActivity : AppCompatActivity() {
     }
 
     private fun hideProgressBar() {
-        loadingProgressBar.visibility = View.GONE
+        llProgressBar.visibility = View.GONE
     }
 
     private fun showDatePicker() {
@@ -280,8 +288,11 @@ class NewLessonActivity : AppCompatActivity() {
         updateThemeSpin(listOf(data.themeNav))
         edt_count.setText(data.Hours)
         edt_count.isEnabled = false
-        edt_count.setTextColor(resources.getColor(android.R.color.black,theme))
+        edt_count.setTextColor(resources.getColor(android.R.color.black))
         btn_date_picker.text = data.Day
         btn_form.text = "Отметить"
+        new_les_progress_bar.visibility =View.GONE
+
     }
+
 }

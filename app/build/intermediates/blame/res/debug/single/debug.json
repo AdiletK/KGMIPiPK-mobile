@@ -1660,6 +1660,10 @@
         "source": "C:\\Users\\Adilet\\.gradle\\caches\\transforms-2\\files-2.1\\31016c6c0856b517b84ecfbcfb815ff0\\appcompat-1.1.0\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+        "merged": "D:\\University_lessons\\7-semester\\TeamWork\\MyApplication\\app\\build\\intermediates\\res\\merged\\debug\\layout_progress_dialog.xml.flat",
+        "source": "D:\\University_lessons\\7-semester\\TeamWork\\MyApplication\\app\\src\\main\\res\\layout\\progress_dialog.xml"
+    },
+    {
         "merged": "D:\\University_lessons\\7-semester\\TeamWork\\MyApplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Adilet\\.gradle\\caches\\transforms-2\\files-2.1\\31016c6c0856b517b84ecfbcfb815ff0\\appcompat-1.1.0\\res\\drawable-hdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },

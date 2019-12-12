@@ -13,7 +13,6 @@ interface LectureApi {
     @GET("api/lections/{lectionId}")
     fun getStudentsInLecture(@Path("lectionId")lectureId: Int): Call<List<StudentModel>>
 
-    @Headers("Content-Type: application/json")
     @POST("api/lections")
     fun insertLecture(@Body lextures: InsertLectureDataModel):Call<Int>
 

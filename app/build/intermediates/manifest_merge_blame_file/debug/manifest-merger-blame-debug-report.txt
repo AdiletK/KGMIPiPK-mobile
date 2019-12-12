@@ -15,76 +15,79 @@
 11-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:6:22-64
 12
 13    <application
-13-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:7:5-41:19
+13-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:7:5-42:19
 14        android:allowBackup="true"
 14-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:8:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 15-->[androidx.core:core:1.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\f71f8da7ba118f56b7a69563a8255a28\core-1.1.0\AndroidManifest.xml:24:18-86
 16        android:debuggable="true"
 17        android:icon="@mipmap/ic_launcher"
-17-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:9:9-43
+17-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:10:9-43
 18        android:label="@string/app_name"
-18-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:10:9-41
+18-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:11:9-41
 19        android:roundIcon="@mipmap/ic_launcher_round"
-19-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:11:9-54
+19-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:12:9-54
 20        android:supportsRtl="true"
-20-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:12:9-35
-21        android:theme="@style/AppTheme" >
-21-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:13:9-40
-22        <activity android:name="com.kstu.myapplication.ui.lessons.students.StudentsActivity" >
-22-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:15:9-18:20
-22-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:15:19-71
-23        </activity>
-24        <activity
-24-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:19:9-22:20
-25            android:name="com.kstu.myapplication.ui.lessons.NewLessonActivity"
-25-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:20:13-57
-26            android:theme="@style/AppTheme" >
-26-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:21:13-44
-27        </activity>
-28        <activity
-28-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:23:9-27:20
-29            android:name="com.kstu.myapplication.ui.lessons.LessonListActivity"
-29-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:24:13-58
-30            android:theme="@style/AppTheme" >
-30-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:25:13-44
-31        </activity>
-32        <activity
-32-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:28:9-36:20
-33            android:name="com.kstu.myapplication.LoginActivity"
-33-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:29:13-42
-34            android:theme="@style/AppTheme.NoActionBar" >
-34-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:30:13-56
-35            <intent-filter>
-35-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:31:13-35:29
-36                <action android:name="android.intent.action.MAIN" />
-36-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:32:17-69
-36-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:32:25-66
-37
-38                <category android:name="android.intent.category.LAUNCHER" />
-38-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:34:17-77
-38-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:34:27-74
-39            </intent-filter>
-40        </activity>
-41        <activity
-41-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:37:9-40:59
-42            android:name="com.kstu.myapplication.MainActivity"
-42-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:38:13-41
-43            android:label="@string/app_name"
-43-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:39:13-45
-44            android:theme="@style/AppTheme.NoActionBar" />
-44-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:40:13-56
-45
-46        <provider
-46-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
-47            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-47-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
-48            android:authorities="com.kstu.myapplication.lifecycle-process"
-48-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
-49            android:exported="false"
-49-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
-50            android:multiprocess="true" />
-50-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
-51    </application>
-52
-53</manifest>
+20-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:13:9-35
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme"
+22-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:14:9-40
+23        android:usesCleartextTraffic="true" >
+23-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:9:9-44
+24        <activity android:name="com.kstu.myapplication.ui.lessons.students.StudentsActivity" >
+24-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:16:9-19:20
+24-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:16:19-71
+25        </activity>
+26        <activity
+26-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:20:9-23:20
+27            android:name="com.kstu.myapplication.ui.lessons.NewLessonActivity"
+27-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:21:13-57
+28            android:theme="@style/AppTheme" >
+28-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:22:13-44
+29        </activity>
+30        <activity
+30-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:24:9-28:20
+31            android:name="com.kstu.myapplication.ui.lessons.LessonListActivity"
+31-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:25:13-58
+32            android:theme="@style/AppTheme" >
+32-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:26:13-44
+33        </activity>
+34        <activity
+34-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:29:9-37:20
+35            android:name="com.kstu.myapplication.LoginActivity"
+35-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:30:13-42
+36            android:theme="@style/AppTheme.NoActionBar" >
+36-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:31:13-56
+37            <intent-filter>
+37-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:32:13-36:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:33:17-69
+38-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:33:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:35:17-77
+40-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:35:27-74
+41            </intent-filter>
+42        </activity>
+43        <activity
+43-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:38:9-41:59
+44            android:name="com.kstu.myapplication.MainActivity"
+44-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:39:13-41
+45            android:label="@string/app_name"
+45-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:40:13-45
+46            android:theme="@style/AppTheme.NoActionBar" />
+46-->D:\University_lessons\7-semester\TeamWork\MyApplication\app\src\main\AndroidManifest.xml:41:13-56
+47
+48        <provider
+48-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
+49            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+49-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
+50            android:authorities="com.kstu.myapplication.lifecycle-process"
+50-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
+51            android:exported="false"
+51-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
+52            android:multiprocess="true" />
+52-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\Adilet\.gradle\caches\transforms-2\files-2.1\c1ab97c2b216f99d5a9decc9b5126dcd\lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
+53    </application>
+54
+55</manifest>

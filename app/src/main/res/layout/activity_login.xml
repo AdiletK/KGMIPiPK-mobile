@@ -36,7 +36,6 @@
         android:foregroundGravity="bottom"
         android:indeterminate="true"
         android:padding="0dp"
-
          />
 
     <RelativeLayout
@@ -48,7 +47,6 @@
         android:layout_marginTop="130dp"
         android:visibility="gone"
         >
-
 
 
         <TextView
@@ -96,5 +94,9 @@
 
 
     </RelativeLayout>
+    <include
+        android:id="@+id/llProgressBar"
+        android:visibility="gone"
+        layout="@layout/progress_dialog"/>
 
 </RelativeLayout>

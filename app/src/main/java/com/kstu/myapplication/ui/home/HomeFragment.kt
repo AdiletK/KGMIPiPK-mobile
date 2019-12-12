@@ -1,18 +1,15 @@
 package com.kstu.myapplication.ui.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.kstu.myapplication.R
 import com.kstu.myapplication.model.CourseModel
@@ -22,10 +19,10 @@ import com.kstu.myapplication.ui.lessons.NewLessonActivity
 import com.kstu.myapplication.model.GroupNavigation
 import com.kstu.myapplication.model.TeacherModel
 import com.kstu.myapplication.ui.api.NetworkService
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class HomeFragment : Fragment() {
 
@@ -37,6 +34,11 @@ class HomeFragment : Fragment() {
     lateinit var listGroups : List<GroupNavigation>
     lateinit var listTeachers : List<TeacherModel>
     lateinit var listCourses : List<CourseModel>
+    lateinit var progressBar: ProgressBar
+    var dep_id = 0
+    var token = ""
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,27 +46,39 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+        getData()
         initViews(root)
-
         initialData()
         initSpinners()
         initApiService()
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        show_pr()
+    }
+
+    fun getData() {
+        val settings = context?.getSharedPreferences("Test", 0)
+        token = settings?.getString(getString(R.string.secret_token), "")!!
+        dep_id = settings.getInt(getString(R.string.depart_id), -1)
+        Log.e("Result","$dep_id and $token")
+    }
+
     private fun initialData() {
         listGroups = ArrayList()
         listGroups = listOf(GroupNavigation(-1, "Группа...", 1, null))
         listTeachers = ArrayList()
-        listTeachers = listOf(TeacherModel(-1, "Преподаватель...", null, null, null, null, null))
+        listTeachers = listOf(TeacherModel(-1, "Преподаватель...", null, null, null, null))
         listCourses = ArrayList()
         listCourses = listOf(CourseModel(-1, "", "Курс...", null, null))
     }
 
     private fun initApiService() {
-        NetworkService.instance
+        NetworkService(token)
             .courseApi
-            .getCourses()
+            .getCourses(dep_id)
             .enqueue(object : Callback<List<CourseModel>>{
                 override fun onFailure(call: Call<List<CourseModel>>, t: Throwable) {
                     Toast.makeText(context,"Couldn't connect to server",Toast.LENGTH_LONG).show()
@@ -74,6 +88,7 @@ class HomeFragment : Fragment() {
                     call: Call<List<CourseModel>>,
                     response: Response<List<CourseModel>>
                 ) {
+                    Log.e("Course","${response.body()?.size}")
                     if (response.body()!=null) {
                         listCourses = response.body()!!
                         initSpinners()
@@ -82,12 +97,15 @@ class HomeFragment : Fragment() {
 
             })
 
-        NetworkService.instance
+        NetworkService(token)
             .teacherApi
-            .getTeachers()
+            .getTeachers(1)
             .enqueue(object : Callback<List<TeacherModel>>{
                 override fun onFailure(call: Call<List<TeacherModel>>, t: Throwable) {
                     Log.e("Fail",t.message+"")
+                    hide_pr()
+                    Toast.makeText(context,"Не удалось загрузить данные",Toast.LENGTH_LONG).show()
+
                 }
 
                 override fun onResponse(
@@ -98,11 +116,10 @@ class HomeFragment : Fragment() {
                     if (response.body()!=null) {
                         listTeachers = response.body()!!
                         initSpinners()
+                        hide_pr()
                     }
                 }
-
             })
-
     }
 
     private fun initViews(root: View) {
@@ -111,6 +128,7 @@ class HomeFragment : Fragment() {
         btnLessnons = root.findViewById(R.id.btn_history_list)
         btnNewLessnon = root.findViewById(R.id.btn_new_lesson)
         courseSpinner = root.findViewById(R.id.course_spinner)
+        progressBar = root.findViewById(R.id.home_progress_bar) as ProgressBar
 
         btnLessnons.setOnClickListener {
             startActivity(startIntent("old"))
@@ -165,5 +183,10 @@ class HomeFragment : Fragment() {
         val groupAdapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, list)
         groupSpinner.adapter = groupAdapter
     }
-
+    private fun show_pr(){
+        home_progress_bar.visibility =View.VISIBLE
+    }
+    private fun hide_pr(){
+        home_progress_bar.visibility = View.GONE
+    }
 }

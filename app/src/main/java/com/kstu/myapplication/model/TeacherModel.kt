@@ -15,9 +15,9 @@ data class TeacherModel (
     @SerializedName("telefon")
     val phoneNumber:String?,
     @SerializedName("prim")
-    val prim:String?,
-    @SerializedName("departmentNavigation")
-    val departmentNavigation:String?
+    val prim:String?
+   // @SerializedName("departmentNavigation")
+    //val departmentNavigation:String?
 //    @SerializedName("facultyNavigation")
 //    val facultyNavigation:String?
     ):Serializable{

@@ -22,9 +22,11 @@ import retrofit2.Response
 
 class StudentsActivity : AppCompatActivity(){
     var lextureId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_students)
+
         lextureId = intent.getIntExtra("id",0)
         initApiService()
         initActionBar()
@@ -54,6 +56,8 @@ class StudentsActivity : AppCompatActivity(){
     private fun updateRecView(list: List<StudentModel>) {
         if (list.isEmpty()){
             text_if_empty.visibility = View.VISIBLE
+        }else {
+            text_if_empty.visibility = View.GONE
         }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val studentAdapter = StudentAdapter()
@@ -87,7 +91,9 @@ class StudentsActivity : AppCompatActivity(){
     }
 
     private fun updateStudent(student: StudentModel) {
-        NetworkService.instance
+        val settings = getSharedPreferences("Test", 0)
+        val token = settings?.getString(getString(R.string.secret_token), "")!!
+        NetworkService(token)
             .lextureApi
             .updateLecture(student.id,student)
             .enqueue(object: Callback<Boolean>{
@@ -112,7 +118,10 @@ class StudentsActivity : AppCompatActivity(){
     }
 
     private fun initApiService(){
-        NetworkService.instance
+        val settings = getSharedPreferences("Test", 0)
+        val token = settings?.getString(getString(R.string.secret_token), "")!!
+        Log.e("Token",token)
+        NetworkService(token)
             .lextureApi
             .getStudentsInLecture(lextureId)
             .enqueue(object : Callback<List<StudentModel>> {
@@ -125,13 +134,10 @@ class StudentsActivity : AppCompatActivity(){
                     response: Response<List<StudentModel>>
                 ) {
                     if (response.body()!=null) {
-                        text_if_empty.visibility = View.GONE
                         updateRecView(response.body()!!)
                     }
-
-
+                    student_progress_bar.visibility = View.GONE
                 }
-
             })
     }
 

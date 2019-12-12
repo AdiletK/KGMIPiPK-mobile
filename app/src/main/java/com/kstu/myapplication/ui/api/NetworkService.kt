@@ -8,11 +8,16 @@ import java.security.cert.X509Certificate
 import javax.net.ssl.*
 import com.google.gson.GsonBuilder
 import com.google.gson.Gson
+import okhttp3.logging.HttpLoggingInterceptor
+import java.util.concurrent.TimeUnit
 
 
+class NetworkService() {
+    private var tok = ""
+    constructor(token:String) : this(){
+        tok=token
+    }
 
-
-class NetworkService private constructor() {
     private val mRetrofit: Retrofit
 
     val teacherApi: TeacherApi
@@ -28,57 +33,39 @@ class NetworkService private constructor() {
         get() = mRetrofit.create(ThemeApi::class.java)
     val typeOfLessonApi:TypeOfLessonApi
         get() = mRetrofit.create(TypeOfLessonApi::class.java)
+    val login :LoginApi
+        get() = mRetrofit.create(LoginApi::class.java)
 
     init {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        // call token by preferences, look example in daron labs
+        val httpClient = OkHttpClient.Builder()
+            .connectTimeout(24, TimeUnit.HOURS)
+            .readTimeout(24, TimeUnit.HOURS)
+            .writeTimeout(24, TimeUnit.HOURS)
+            .addInterceptor(interceptor)
+            .addInterceptor {
+                val original = it.request()
+                val builder = original.newBuilder()
+                builder.addHeader("Authorization", "Bearer $tok")
+                builder.addHeader("Accept", "application/json; charset=UTF-8")
+                val request = builder.build()
+                return@addInterceptor it.proceed(request)
+            }
+            .build()
+
         val gson = GsonBuilder()
             .setLenient()
             .create()
         mRetrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(getUnsafeOkHttpClient().build())
+            .baseUrl("http://10.0.2.2:5000/")
+            .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
-    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
-        try {
-            // Create a trust manager that does not validate certificate chains
-            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-                override fun getAcceptedIssuers(): Array<X509Certificate> {
-                    return arrayOf() //To change body of created functions use File | Settings | File Templates.
-                }
-
-                @Throws(CertificateException::class)
-                override fun checkClientTrusted(
-                    chain: Array<X509Certificate>,
-                    authType: String
-                ) {
-                }
-
-                @Throws(CertificateException::class)
-                override fun checkServerTrusted(
-                    chain: Array<X509Certificate>,
-                    authType: String
-                ) {
-                }
-            })
-
-            // Install the all-trusting trust manager
-            val sslContext = SSLContext.getInstance("SSL")
-            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
-
-            // Create an ssl socket factory with our all-trusting manager
-            val sslSocketFactory = sslContext.getSocketFactory()
-
-            val builder = OkHttpClient.Builder()
-            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-            builder.hostnameVerifier { _, _ -> true }
-            return builder
-        } catch (e: Exception) {
-            throw RuntimeException(e)
-        }
-
-    }
 
     companion object {
         private var mInstance: NetworkService? = null
